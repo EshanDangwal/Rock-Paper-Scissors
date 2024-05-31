@@ -1,45 +1,59 @@
+const btnContainer=document.createElement("div");
+const rockBtn=document.createElement("button");
+rockBtn.innerText="Rock";
+const paperBtn=document.createElement("button");
+paperBtn.innerText="Paper";
+const scissorBtn=document.createElement("button");
+scissorBtn.innerText="Scissors";
+
+
+btnContainer.addEventListener("click",(event)=>{
+    playGame(event.target.innerText)
+})
+
+
+btnContainer.appendChild(paperBtn);
+btnContainer.appendChild(scissorBtn);
+btnContainer.appendChild(rockBtn);
+document.body.appendChild(btnContainer);
+
+const ResultDiv=document.createElement("div");
+
 const choices=['rock','paper','scissors'];
+
 let humanScore=0,computerScore=0;
 let userChoice=null;
 const getComputerChoice=()=>{
     return choices[Math.floor(Math.random()*3)]
 }
 
-const getHumanChoice=()=>{
- return userChoice= prompt("Input your choice");
-}
 
 const playRound=(humanChoice,computerChoice)=>{
     const transformedHumanChoice=humanChoice.toLowerCase();
     if(transformedHumanChoice===computerChoice){
-        console.log("It's a draw!")
+        ResultDiv.textContent="It's a draw!"
     }else if(transformedHumanChoice==="rock"&&computerChoice==="paper"){
-        console.log('You lost! Paper beats rock');
-        computerScore++;
+        ResultDiv.textContent="You lost! Paper beats rock";
+        ++computerScore;
     }else if(transformedHumanChoice==="paper"&&computerChoice==="scissors"){
-        console.log('You lost! Scissors beats paper');
-        computerScore++;
+        ResultDiv.textContent="You lost! Scissors beats paper";
+        ++computerScore;
     }else if(transformedHumanChoice==="scissors"&&computerChoice==="rock"){
-        console.log('You lost! Rock beats Scissors');
-        computerScore++;
+        ResultDiv.textContent='You lost! Rock beats Scissors';
+        ++computerScore;
     }
     else{
-        console.log(`you won! ${transformedHumanChoice} beats ${computerChoice}`)
-        humanScore++;
+        ResultDiv.textContent=`you won! ${transformedHumanChoice} beats ${computerChoice}`;
+        ++humanScore;
     }
 }
 
-function playGame(){
-    let i=0;
-    while(i<5){
-        playRound(getHumanChoice(),getComputerChoice());
-        i++;
-    }
-    if(humanScore>computerScore){
-        console.log('You Won by', humanScore);
-    }else{
-        console.log('Computer won by ', computerScore);
-    }
-}
+const scoreDiv=document.createElement("div");
+scoreDiv.textContent=`Human: ${humanScore} Computer: ${computerScore}`
+document.body.append(scoreDiv);
+document.body.appendChild(ResultDiv);
 
-playGame();
+function playGame(humanChoice){
+    playRound(humanChoice,getComputerChoice());
+    scoreDiv.textContent=`Human: ${humanScore} Computer: ${computerScore}`
+}
