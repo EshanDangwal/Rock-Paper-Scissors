@@ -48,4 +48,3 @@ For any questions or feedback, feel free to reach out via [email](mailto:eshancd
 
 Enjoy playing Rock-Paper-Scissors! Have fun!
 
-![Rock-Paper-Scissors](screenshot.png)
